@@ -1,7 +1,7 @@
 import motor.motor_asyncio
 from beanie import Document
 from fastapi_users.db import BeanieBaseUser, BeanieUserDatabase
-from dotenv import load_dotenv
+
 from app import config
 
 DATABASE_URL = config.MONGO_URI
