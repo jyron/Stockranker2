@@ -3,8 +3,10 @@ from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.db import User, db
+from app.models.stocks import Stock
 from app.schemas import UserCreate, UserRead, UserUpdate
 from app.users import auth_backend, current_active_user, fastapi_users
+from app.utils import get_finnhub_data
 
 app = FastAPI()
 origins = "http://localhost:3000"
@@ -39,6 +41,7 @@ app.include_router(
     prefix="/users",
     tags=["users"],
 )
+app.include_router(get_finnhub_data.router, tags=["FINNHUB"])
 
 
 @app.get("/authenticated-route")
@@ -52,5 +55,6 @@ async def on_startup():
         database=db,
         document_models=[
             User,
+            Stock,
         ],
     )
