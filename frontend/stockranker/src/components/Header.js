@@ -1,40 +1,73 @@
+import { Box } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
-import { useAuth } from "../utils/authContext"; // update the path as per your directory structure
+import { useAuth } from "../utils/authContext";
 
 function Header() {
-  const { user, login, logout } = useAuth();
-
+  const { isLoggedIn, user, login, register, logout } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  if (user) {
-    return (
-      <div>
-        Welcome, {user.email}! <button onClick={logout}>Logout</button>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <h1>Login</h1>
-        <input
-          type="email"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button onClick={() => login(username, password)}>Login</button>
-        <h1>Or Register</h1>
-        {/* Here you should add a form for registration just like the login form */}
-      </div>
-    );
-  }
+  const handleLogin = () => {
+    login(username, password);
+    setUsername("");
+    setPassword("");
+  };
+
+  const handleRegister = () => {
+    register(username, password);
+    setUsername("");
+    setPassword("");
+  };
+
+  return (
+    <Box>
+      <AppBar position="fixed">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            StockRanker
+          </Typography>
+          {user ? (
+            <>
+              <Typography variant="body1" sx={{ marginRight: 2 }}>
+                Welcome, {user.email}!
+              </Typography>
+              <Button variant="contained" onClick={logout}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <TextField
+                type="email"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                label="Username"
+                sx={{ marginRight: 1 }}
+              />
+              <TextField
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                label="Password"
+                sx={{ marginRight: 1 }}
+              />
+              <Button variant="contained" onClick={handleLogin}>
+                Login
+              </Button>
+              <Button variant="contained" onClick={handleRegister}>
+                Register
+              </Button>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 }
 
 export { Header };

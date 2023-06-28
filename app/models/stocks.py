@@ -16,6 +16,9 @@ class Stock(Document):
     shareOutstanding: float
     ticker: str
     weburl: str
+    price: Optional[float] = None
+    likes: Optional[int] = None
+    dislikes: Optional[int] = None
 
     class Settings:
         name = "Stock"

@@ -1,19 +1,34 @@
-# import json
-# import finnhub
+import json
+import time
 
-# finnhub_client = finnhub.Client(api_key="cfs2t69r01qr5t5sneu0cfs2t69r01qr5t5sneug")
-# filename = "sp500_data.json"
-# try:
-#     with open(filename, "r") as file:
-#         json_data = json.load(file)
-# except FileNotFoundError:
-#     json_data = []
+import finnhub
+from fastapi import APIRouter
 
-# tickers = []
-# for entry in json_data:
-#     ticker = entry.get("ticker")
-#     if ticker == None:
-#         tickers.append(entry)
+from app import config
+from app.models.stocks import Stock
 
-# print(tickers)
-# print(len(tickers))
+router = APIRouter()
+finnhub_client = finnhub.Client(api_key=config.FINNHUB_API_KEY)
+
+
+# update prices for all stocks in database, with error handling using the finnhub api, and accounting for the rate limit on the api of 60 calls per minute
+async def update_prices():
+    stocks = await Stock.all().to_list()
+    number_updated = 0
+    for stock in stocks:
+        try:
+            stock_data = finnhub_client.quote(stock.ticker)
+            stock.price = stock_data["c"]
+            print(stock.ticker, stock.price)
+            await stock.save()
+            number_updated += 1
+            time.sleep(1)
+        except Exception as e:
+            print(f"Error: {e}")
+    return "Prices updated, number of prices updated: " + str(number_updated)
+
+
+# router to updte prices
+@router.get("/update_prices")
+async def update_prices_router():
+    return await update_prices()

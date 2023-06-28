@@ -4,9 +4,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.db import User, db
 from app.models.stocks import Stock
+from app.models.stocklike import StockLike
+from app.routes import stocklike, stocks
 from app.schemas import UserCreate, UserRead, UserUpdate
 from app.users import auth_backend, current_active_user, fastapi_users
-from app.utils import get_finnhub_data
+from app.utils import get_finnhub_data, update_finnub_price
 
 app = FastAPI()
 origins = "http://localhost:3000"
@@ -41,20 +43,20 @@ app.include_router(
     prefix="/users",
     tags=["users"],
 )
-app.include_router(get_finnhub_data.router, tags=["FINNHUB"])
+app.include_router(get_finnhub_data.router, tags=["Finnhub"])
+app.include_router(update_finnub_price.router, tags=["Finnhub"])
+app.include_router(stocks.router, tags=["stocks"])
+app.include_router(stocklike.router, tags=["stocklikes"])
 
 
 @app.get("/authenticated-route")
 async def authenticated_route(user: User = Depends(current_active_user)):
-    return {"message": f"Hello {user.email}!"}
+    return {"message": f"Hello {type(user.id)}!"}
 
 
 @app.on_event("startup")
 async def on_startup():
     await init_beanie(
         database=db,
-        document_models=[
-            User,
-            Stock,
-        ],
+        document_models=[User, Stock, StockLike],
     )

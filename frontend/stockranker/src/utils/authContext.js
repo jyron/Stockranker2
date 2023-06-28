@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Fetch the current user
   useEffect(() => {
@@ -20,17 +21,40 @@ export function AuthProvider({ children }) {
         method: "post",
         url: "http://localhost:8000/auth/jwt/login",
         data: {
-          username: "jj@jj.com",
-          password: "jj",
+          username: username,
+          password: password,
         },
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         withCredentials: true,
       });
       setUser(response.data);
+      setIsLoggedIn(true);
     } catch (err) {
       console.error(err);
+    }
+  };
+  useEffect(() => {
+    if (isLoggedIn) {
+      // User is logged in, reload the page
+      window.location.reload();
+    }
+  }, [isLoggedIn]);
+
+  const register = async (username, password) => {
+    try {
+      const response = await axios({
+        method: "post",
+        url: "http://localhost:8000/auth/register",
+        data: {
+          email: username,
+          password: password,
+        },
+      });
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -48,7 +72,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
