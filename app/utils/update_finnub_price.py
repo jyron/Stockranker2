@@ -21,7 +21,6 @@ async def update_prices():
             stock.price = stock_data["c"]
             print(stock.ticker, stock.price)
             await stock.save()
-            number_updated += 1
             time.sleep(1)
         except Exception as e:
             print(f"Error: {e}")
