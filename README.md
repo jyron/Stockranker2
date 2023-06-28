@@ -3,7 +3,7 @@ This project list stocks and other financial assets, and allows users to likeand
 
 ### Backend
 To run the backend follow these steps (in the root directory of the project)
-1. Create a pythhn virtual env 
+1. Create a python virtual env 
 ```python3 -m venv venv```
 2. Activate the virtual env
 ```source venv/bin/activate```
