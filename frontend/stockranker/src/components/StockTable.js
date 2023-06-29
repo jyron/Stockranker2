@@ -102,53 +102,73 @@ const StockTable = ({ stocks }) => {
   };
 
   return (
-    <Table {...getTableProps()} style={{ border: "solid 1px black" }}>
-      <TableHead>
-        {headerGroups.map((headerGroup) => (
-          <TableRow {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
-              <TableCell
-                {...column.getHeaderProps()}
-                style={{
-                  borderBottom: "solid 3px black",
-                  background: "aliceblue",
-                  color: "black",
-                  fontWeight: "bold",
-                }}
-              >
-                <Typography variant="body1">
-                  {column.render("Header")}
-                </Typography>
-              </TableCell>
-            ))}
-          </TableRow>
-        ))}
-      </TableHead>
-      <TableBody {...getTableBodyProps()}>
-        {rows.map((row, index) => {
-          prepareRow(row);
-          return (
-            <TableRow {...row.getRowProps()}>
-              {row.cells.map((cell, indexc) => {
-                return (
-                  <TableCell
-                    {...cell.getCellProps()}
-                    style={{
-                    padding: "20px",
-                      border: "solid 1px gray",
-                      background: (index%2==0) ? "#FFFFFF" : "#f2f2f2",
-                      color: (indexc===2) ? "#4472de" : "#000000",
-                    }}
-                  >
-                    {cell.render("Cell")}
-                  </TableCell>
-                );
-              })}
+    <div>
+      <div style={{width: "100%", display: "flex", flexFlow: "row", justifyContent: "flex-end", marginBottom: "30px"}}>
+        <div class="table_search" style={{marginRight: "10px"}}>
+          <input type="text" placeholder="asset, name, currency" class="MuiInputBase-input" value=""
+            style={{fontSize: "16px", color: "#fff", width: "300px", height: "35px", display: "block", borderRadius: "5px", paddingLeft: "5px"}} />
+        </div>
+        <button style={{
+          fontSize: "15px",
+          color: "#fff",
+          width: "87px",
+          height: "35px",
+          display: "block",
+          cursor: "pointer",
+          borderRadius: "5px",
+          backgroundColor: "#222",
+          outline: "var(--colorSearchInput)",
+          marginRight: "50px",
+        }}>Search</button>
+      </div>
+      <Table {...getTableProps()} style={{ border: "solid 1px black" }}>
+        <TableHead>
+          {headerGroups.map((headerGroup) => (
+            <TableRow {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <TableCell
+                  {...column.getHeaderProps()}
+                  style={{
+                    borderBottom: "solid 3px black",
+                    background: "aliceblue",
+                    color: "black",
+                    fontWeight: "bold",
+                  }}
+                >
+                  <Typography variant="body1">
+                    {column.render("Header")}
+                  </Typography>
+                </TableCell>
+              ))}
             </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+          ))}
+        </TableHead>
+        <TableBody {...getTableBodyProps()}>
+          {rows.map((row, index) => {
+            prepareRow(row);
+            return (
+              <TableRow {...row.getRowProps()}>
+                {row.cells.map((cell, indexc) => {
+                  return (
+                    <TableCell
+                      {...cell.getCellProps()}
+                      style={{
+                      padding: "20px",
+                        border: "solid 1px gray",
+                        background: (index%2==0) ? "#FFFFFF" : "#f2f2f2",
+                        color: (indexc===2) ? "#4472de" : "#000000",
+                      }}
+                    >
+                      {cell.render("Cell")}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 
