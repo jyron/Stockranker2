@@ -29,15 +29,18 @@ const StockTable = ({ stocks }) => {
       {
         Header: "Price",
         accessor: "price",
+        sortType: 'basic',
         Cell: ({ value }) => <span>{`$${value.toFixed(2)}`}</span>,
       },
       {
         Header: "Ticker",
         accessor: "ticker",
+        sortType: 'basic',
       },
       {
         Header: "Name",
         accessor: "name",
+        sortType: 'basic',
       },
       {
         Header: "Industry",
@@ -122,18 +125,19 @@ const StockTable = ({ stocks }) => {
         ))}
       </TableHead>
       <TableBody {...getTableBodyProps()}>
-        {rows.map((row) => {
+        {rows.map((row, index) => {
           prepareRow(row);
           return (
             <TableRow {...row.getRowProps()}>
-              {row.cells.map((cell) => {
+              {row.cells.map((cell, indexc) => {
                 return (
                   <TableCell
                     {...cell.getCellProps()}
                     style={{
-                      padding: "20px",
+                    padding: "20px",
                       border: "solid 1px gray",
-                      background: "white",
+                      background: (index%2==0) ? "#FFFFFF" : "#f2f2f2",
+                      color: (indexc===2) ? "#4472de" : "#000000",
                     }}
                   >
                     {cell.render("Cell")}
