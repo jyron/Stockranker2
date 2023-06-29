@@ -14,7 +14,7 @@ async def like_stock(
 
     if existing_like:
         if existing_like.like_type == action:
-            raise HTTPException(400, f"User has already {action}d this stock")
+            await remove_like(stock_id=stock_id, user_id=user_id)
         else:
             # Update the like_type if the user is changing their action
             existing_like.like_type = action
