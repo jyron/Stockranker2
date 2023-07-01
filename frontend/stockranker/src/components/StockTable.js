@@ -17,6 +17,8 @@ import axios from "axios";
 
 const StockTable = ({ stocks }) => {
   const [loading, setLoading] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+
   const columns = useMemo(
     () => [
       {
@@ -101,12 +103,17 @@ const StockTable = ({ stocks }) => {
       .catch((err) => console.log(err));
   };
 
+  const searchTable = async (e) => {
+    console.log(e.target.value)
+    setSearchInput(e.target.value)
+  };
+
   return (
     <div>
       <div style={{width: "100%", display: "flex", flexFlow: "row", justifyContent: "flex-end", marginBottom: "30px"}}>
-        <div class="table_search" style={{marginRight: "10px"}}>
-          <input type="text" placeholder="asset, name, currency" class="MuiInputBase-input" value=""
-            style={{fontSize: "16px", color: "#fff", width: "300px", height: "35px", display: "block", borderRadius: "5px", paddingLeft: "5px"}} />
+        <div style={{marginRight: "10px"}}>
+          <input type="text" onChange={searchTable} value={searchInput} name="searchInput" placeholder="asset, name, currency"
+            style={{fontSize: "16px", color: "#000", width: "300px", height: "35px", display: "block", borderRadius: "5px", paddingLeft: "5px"}} />
         </div>
         <button style={{
           fontSize: "15px",
