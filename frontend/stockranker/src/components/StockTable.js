@@ -15,11 +15,8 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 //import SearchTableHeader from "./SearchTableHeader.js";
 import axios from "axios";
 
-const StockTable = ({ stocks }) => {
-  const [myState, setState] = useState(stocks)
-  const initialState = React.useMemo(() => stocks.initialState);
-
-  useEffect(() => {}, [stocks])
+const StockTable = ({stocks, onUpdateStock}) => {
+  const [isEditing, setIsEditing] = useState(false)
   const [loading, setLoading] = useState(false);
 
   const columns = useMemo(
@@ -66,7 +63,7 @@ const StockTable = ({ stocks }) => {
         Cell: ({ row }) => (
           <span>
             <IconButton
-              onClick={() => handleLike(row.original._id, row)}
+              onClick={() => handleLike(row.original._id)}
               aria-label="Like"
             >
               <ThumbUpIcon />
@@ -85,64 +82,65 @@ const StockTable = ({ stocks }) => {
     [loading]
   );
 
-const {
-  getTableProps,
-  getTableBodyProps,
-  headerGroups,
-  rows,
-  prepareRow,
-  state,
-  setGlobalFilter
-} = useTable(
-  {
-    columns,
-    data: stocks,
-    initialState: {
-      globalFilter: ""
-    }
-  },
-  useFilters,
-  useGlobalFilter,
-  useSortBy
-);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    setGlobalFilter
+  } = useTable(
+    {
+      columns,
+      data: stocks,
+      initialState: {
+        globalFilter: ""
+      }
+    },
+    useFilters,
+    useGlobalFilter,
+    useSortBy
+  );
 
-const { globalFilter } = state;
-//  console.log(rows);
+  const { globalFilter } = state;
 
-  if(stocks!= null) console.log(stocks);
-  const handleLike = async (stock_id, row) => {
+  const handleLike = async (stock_id) => {
     await axios
       .get(`http://localhost:8000/stocks/${stock_id}/like?action=like`, {
         withCredentials: true,
       })
       .then(
-//        (response) => console.log(response.data)
-      )
-      .then(
-        displayLikeOrDislike(stock_id, row, "like")
+        (response) => {
+          console.log(response.data)
+          displayLikeOrDislike(stock_id, "like")
+        }
       )
       .catch((err) => console.log(err));
   };
 
-//  const domNode = document.getElementById('root');
-//  const root = createRoot(domNode);
+  const handleDislike = async (stock_id) => {
+    await axios
+      .get(`http://localhost:8000/stocks/${stock_id}/dislike?action=dislike`, {
+        withCredentials: true,
+      })
+      .then(
+        (response) => {
+          console.log(response.data)
+          displayLikeOrDislike(stock_id, "dislike")
+        }
+      )
+      .catch((err) => console.log(err));
+  };
 
-  const displayLikeOrDislike = async (stock_id, row, action) => {
-    console.log(row)
+  function handleStockUpdate(updatedStock) {
+    setIsEditing(false);
+    onUpdateStock(updatedStock);
+  }
+
+  const displayLikeOrDislike = async (stock_id, action) => {
     if (action === "like") {
-//      let stockToChange = stocks.filter(stocks => stocks._id.includes(stock_id))
-//      stockToChange = stockToChange.likes+1
-//      console.log(stockToChange[0][action])
-//      console.log(stockToChange[0]['likes'])
-//      (action === "like") ?
-//        stockToChange[0]['likes'] = stockToChange[0]['likes'] + 1
-//      :
-//         stockToChange[0]['dislike'] = stockToChange[0]['dislike'] + 1;
-//      console.log(stockToChange[0]['likes'])
-//      stockToChange[0]['likes'] = stockToChange[0]['likes'] + 1
-//      console.log(stockToChange)
-//      console.log(stockToChange[0]['likes'])
-      const newStocks = stocks?.map(stock => {
+      const updatedStock = stocks?.map(stock => {
         if (stock._id === stock_id) {
           stock.likes += 1
           return stock;
@@ -150,22 +148,20 @@ const { globalFilter } = state;
           return stock;
         }
       });
-//      await setState(newStocks);
-//      root.render(<StockTable stocks={newStocks} />);
+      handleStockUpdate(updatedStock)
       console.log(stocks);
     } else {
-      console.log(stocks.filter(stocks => stocks._id.includes(stock_id)))
+      const updatedStock = stocks?.map(stock => {
+        if (stock._id === stock_id) {
+          stock.dislikes += 1
+          return stock;
+        } else { // No change
+          return stock;
+        }
+      });
+      handleStockUpdate(updatedStock)
+      console.log(stocks);
     }
-
-//    console.log(stocks.filter(stocks => stocks._id.includes(stock_id)))
-  };
-  const handleDislike = async (stock_id) => {
-    await axios
-      .get(`http://localhost:8000/stocks/${stock_id}/dislike?action=dislike`, {
-        withCredentials: true,
-      })
-      .then((response) => console.log(response.data))
-      .catch((err) => console.log(err));
   };
 
   return (

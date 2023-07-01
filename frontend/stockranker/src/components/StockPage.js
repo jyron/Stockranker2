@@ -18,16 +18,29 @@ const StockPage = () => {
         console.error("Error fetching stocks:", error);
       }
     };
-
     fetchStocks();
   }, []);
+
+  function onUpdateStock(updatedStock) {
+//    const updatedCustomers = customers.map(
+//      customer => {
+//        if (customer.id === updatedCustomer.id) {
+//          return updatedCustomer
+//        } else {return customer}
+//      }
+//    )
+    setStocks(updatedStock)
+  }
 
   return (
     <Box paddingTop="64px">
       <div>
         <Typography variant="h3">Stocks</Typography>
         {stocks.length > 0 ? (
-          <StockTable stocks={stocks} />
+          <StockTable
+            stocks={stocks}
+            onUpdateStock={onUpdateStock}
+          />
         ) : (
           <p>Loading stocks...</p>
         )}
