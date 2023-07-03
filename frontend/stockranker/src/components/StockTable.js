@@ -1,6 +1,5 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTable, useSortBy, useFilters, useGlobalFilter } from "react-table";
-import { createRoot } from 'react-dom/client';
 import {
   Table,
   TableBody,
@@ -167,6 +166,7 @@ const StockTable = ({stocks, onUpdateStock}) => {
   return (
     <div>
       {/*<SearchTableHeader value={{searchTable, searchInput}}/>*/}
+      <Typography variant="h3">Stocks</Typography>
       <div style={{width: "100%", display: "flex", flexFlow: "row", justifyContent: "flex-end", marginBottom: "30px"}}>
         <div style={{marginRight: "10px"}}>
           <input type="text" onChange={e => setGlobalFilter(e.target.value)} value={globalFilter} name="searchInput" placeholder="asset, name, currency"
@@ -185,7 +185,7 @@ const StockTable = ({stocks, onUpdateStock}) => {
           marginRight: "50px",
         }}>Search</button>
       </div>
-      <Table {...getTableProps()} style={{ border: "solid 1px black" }}>
+      <Table {...getTableProps()} style={{ border: "solid 1px black", borderRadius: "15px" }}>
         <TableHead>
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
@@ -221,11 +221,16 @@ const StockTable = ({stocks, onUpdateStock}) => {
                       style={{
                       padding: "20px",
                         border: "solid 1px gray",
-                        background: (index%2==0) ? "#FFFFFF" : "#f2f2f2",
+                        background: (index%2===0) ? "#FFFFFF" : "#f2f2f2",
                         color: (indexc===2) ? "#4472de" : "#000000",
                       }}
                     >
-                      {cell.render("Cell")}
+                      {
+                        indexc===0 ?
+                          <a href="/assets">{cell.render("Cell")}</a>
+                        :
+                          cell.render("Cell")
+                      }
                     </TableCell>
                   );
                 })}

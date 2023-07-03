@@ -1,0 +1,181 @@
+.centeringdiv {
+    flex-flow: column;
+    display: flex;
+    align-items: center;
+}
+.assetdetailcontainer {
+    width: 85%;
+    height: 50px;
+    display: block;
+    flex-flow: row;
+    align-items: left;
+    justify-content: left;
+}
+.assetcard {
+    height: 300px;
+    width: 85%;
+    flex-flow: row;
+    align-items: left;
+    justify-content: left;
+    margin-bottom: 50px;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.16);
+    padding: 15px;
+}
+.assetcardtitle {
+    flex-flow: column;
+    width: 100%;
+    align-items: left;
+    margin-bottom: 15px;
+}
+.assetcardtitledivimage {
+    width: 5%;
+    display: inline-block;
+    text-align: left;
+}
+.assetcardtitleimage {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+}
+.assetcardtitlediv {
+    width: 70%;
+    display: inline-block;
+    text-align: left;
+}
+.assetcardtitleinfo {
+    width: 100%;
+    display: inline-block;
+    font-family: Open Sans,serif;
+    font-size: 15px;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: #222;
+}
+.assetcardsubtitleinfo {
+    width: 100%;
+    display: inline-block;
+    font-family: Open Sans,serif;
+    font-size: 15px;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: 400;
+    color: #89909b;
+}
+.assetcardtitleicons {
+    width: 25%;
+    display: inline-block;
+    letter-spacing: normal;
+    text-align: right;
+    font-weight: 600;
+}
+.icons {
+    margin-right: 10px;
+}
+.iconfb {
+    content: url(https://binance.mintscan.io/static/media/facebook_btn.af66b24d.svg);
+}
+.icontwitter {
+    content: url(https://binance.mintscan.io/static/media/twitter_btn.bb42567a.svg);
+}
+.iconig {
+    content: url(https://binance.mintscan.io/static/media/instagram_btn.34fca41a.svg);
+}
+.divider {
+    flex-flow: "column";
+    width: 100%;
+    height: 0;
+    border: 1px solid #e6e6e6;
+    display: block;
+    flex-flow: row;
+    align-items: left;
+}
+.assetcarddivlist {
+    flex-flow: column;
+    height: 150px;
+    width: 100%;
+    display: block;
+    flex-flow: row;
+    align-items: left;
+    vertical-align: baseline;
+}
+.assetcarddivlistul {
+    display: grid;
+    grid-template-rows: 20px;
+    grid-template-columns: 203px 1fr;
+    margin-bottom: 5px;
+    margin-left: -30px;
+}
+.assetcarddivlistli {
+    list-style-type: none;
+}
+.assetcardtransactions {
+    height: 300px;
+    width: 85%;
+    flex-flow: row;
+    align-items: left;
+    justify-content: left;
+    margin-bottom: 50px;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.16);
+    padding: 15px;
+}
+.assetcardtransactionsheader {
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+}
+.assetcardtransactionsheadertitle {
+    width: 25%;
+    display: inline-block;
+    font-family: Open Sans,serif;
+    font-size: 15px;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: #222;
+}
+.assetcardtransactionscontent {
+    width: 100%;
+    background-color: #f2f2f2;
+    display: inline-block;
+    text-align: left;
+}
+.assetcardtransactionscontent2 {
+    width: 100%;
+    background-color: #fff;
+    display: inline-block;
+    text-align: left;
+}
+.assetcardtransactionscontenttxt {
+    width: 25%;
+    display: inline-block;
+    font-family: Open Sans,serif;
+    font-size: 15px;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: 400;
+    color: #222;
+}
+.assetcardtransactionscircle {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    border-color: aliceblue;
+}
+table:td:hover {
+    background-color: #f5f5f5;
+}

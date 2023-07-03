@@ -22,20 +22,12 @@ const StockPage = () => {
   }, []);
 
   function onUpdateStock(updatedStock) {
-//    const updatedCustomers = customers.map(
-//      customer => {
-//        if (customer.id === updatedCustomer.id) {
-//          return updatedCustomer
-//        } else {return customer}
-//      }
-//    )
     setStocks(updatedStock)
   }
 
   return (
-    <Box paddingTop="64px">
+    <Box marginTop="75px" p="3px">
       <div>
-        <Typography variant="h3">Stocks</Typography>
         {stocks.length > 0 ? (
           <StockTable
             stocks={stocks}
