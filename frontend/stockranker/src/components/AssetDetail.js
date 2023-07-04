@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useState } from "react";
 import { useTable, useSortBy, useFilters, useGlobalFilter } from "react-table";
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import {
   Box,
   Table,
@@ -15,8 +15,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import axios from "axios";
 
-const AssetDetail = ({stock}) => {
-  
+const AssetDetail = ({ stock }) => {
   return (
     <div className="centeringdiv">
       <div className="assetdetailcontainer">
@@ -25,7 +24,7 @@ const AssetDetail = ({stock}) => {
       <div className="assetcard">
         <div className="assetcardtitle">
           <div className="assetcardtitledivimage">
-            <img className="assetcardtitleimage" src={`${stock.logo}`}/>
+            <img className="assetcardtitleimage" src={`${stock.logo}`} />
           </div>
           <div className="assetcardtitlediv">
             <div className="assetcardtitleinfo">{`${stock.name}`}</div>
@@ -49,11 +48,11 @@ const AssetDetail = ({stock}) => {
           </ul>
           <ul className="assetcarddivlistul">
             <li className="assetcarddivlistli">Name</li>
-            <li className="assetcarddivlistli">Fortive Corp</li>
+            <li className="assetcarddivlistli">{`${stock.name}`}</li>
           </ul>
           <ul className="assetcarddivlistul">
             <li className="assetcarddivlistli">Industry</li>
-            <li className="assetcarddivlistli">Machinery</li>
+            <li className="assetcarddivlistli">{`${stock.finnhubIndustry}`}</li>
           </ul>
           <ul className="assetcarddivlistul">
             <li className="assetcarddivlistli">Likes</li>
@@ -77,29 +76,41 @@ const AssetDetail = ({stock}) => {
           <div className="assetcardtransactionsheadertitle">Percentage</div>
         </div>
         <div className="assetcardtransactionscontent">
-          <div className="assetcardtransactionscontenttxt"><span className="assetcardtransactionscircle">1</span></div>
-          <div className="assetcardtransactionscontenttxt">bnb18d ... 0hy0js</div>
-          <div className="assetcardtransactionscontenttxt">89,999,972,094.50</div>
+          <div className="assetcardtransactionscontenttxt">
+            <span className="assetcardtransactionscircle">1</span>
+          </div>
+          <div className="assetcardtransactionscontenttxt">
+            bnb18d ... 0hy0js
+          </div>
+          <div className="assetcardtransactionscontenttxt">
+            89,999,972,094.50
+          </div>
           <div className="assetcardtransactionscontenttxt">99.99</div>
         </div>
         <div className="assetcardtransactionscontent2">
           <div className="assetcardtransactionscontenttxt">2</div>
-          <div className="assetcardtransactionscontenttxt">bnb165 ... zy9jc9</div>
+          <div className="assetcardtransactionscontenttxt">
+            bnb165 ... zy9jc9
+          </div>
           <div className="assetcardtransactionscontenttxt">4,170.55</div>
           <div className="assetcardtransactionscontenttxt">&lt;0.01%</div>
         </div>
         <div className="assetcardtransactionscontent">
           <div className="assetcardtransactionscontenttxt">3</div>
-          <div className="assetcardtransactionscontenttxt">bnb1cj ... 6u849e</div>
+          <div className="assetcardtransactionscontenttxt">
+            bnb1cj ... 6u849e
+          </div>
           <div className="assetcardtransactionscontenttxt">2,751.00</div>
           <div className="assetcardtransactionscontenttxt">&lt;0.01%</div>
         </div>
         <div className="assetcardtransactionscontent2">
           <div className="assetcardtransactionscontenttxt">4</div>
-          <div className="assetcardtransactionscontenttxt">bnb1a2 ... 79erd4</div>
+          <div className="assetcardtransactionscontenttxt">
+            bnb1a2 ... 79erd4
+          </div>
           <div className="assetcardtransactionscontenttxt">1,343.63</div>
           <div className="assetcardtransactionscontenttxt">&lt;0.01%</div>
-          </div>
+        </div>
       </div>
     </div>
   );

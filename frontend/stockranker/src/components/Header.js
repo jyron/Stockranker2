@@ -6,6 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import { useAuth } from "../utils/authContext";
+import { Link } from "react-router-dom";
 
 function Header() {
   const { isLoggedIn, user, login, register, logout } = useAuth();
@@ -29,7 +30,9 @@ function Header() {
       <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            StockRanker
+            <a href="/" style={{ textDecoration: "none", color: "white" }}>
+              StockRanker
+            </a>
           </Typography>
           {user ? (
             <>
