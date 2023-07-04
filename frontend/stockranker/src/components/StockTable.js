@@ -105,6 +105,7 @@ const StockTable = ({stocks, onUpdateStock}) => {
   const { globalFilter } = state;
 
   const handleLike = async (stock_id) => {
+
     await axios
       .get(`http://localhost:8000/stocks/${stock_id}/like?action=like`, {
         withCredentials: true,
@@ -112,7 +113,22 @@ const StockTable = ({stocks, onUpdateStock}) => {
       .then(
         (response) => {
           console.log(response.data)
-          displayLikeOrDislike(stock_id, "like")
+          console.log(response.data.action)
+          axios
+//          http://localhost:8000/stocks_with_likes
+          .get(`http://localhost:8000/stocks/${stock_id}`, {
+            withCredentials: true
+          })
+          .then(
+            (response) => {
+              console.log(response.data)
+            }
+          )
+          .catch((err) => console.log(err));
+          if(response.data.action===undefined) {
+            console.log(response.data)
+            displayLikeOrDislike(stock_id, "like")
+          }
         }
       )
       .catch((err) => console.log(err));
@@ -126,7 +142,11 @@ const StockTable = ({stocks, onUpdateStock}) => {
       .then(
         (response) => {
           console.log(response.data)
-          displayLikeOrDislike(stock_id, "dislike")
+          console.log(response.data.action)
+          if(response.data.action===undefined) {
+            console.log(response.data)
+            displayLikeOrDislike(stock_id, "dislike")
+          }
         }
       )
       .catch((err) => console.log(err));
