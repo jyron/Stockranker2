@@ -21,8 +21,15 @@ const StockPage = () => {
     fetchStocks();
   }, []);
 
-  function onUpdateStock(updatedStock) {
-    setStocks(updatedStock)
+  function onUpdateStock(stocks, updatedStock) {
+    const updatedStocks = stocks?.map(stock => {
+      if (stock._id === updatedStock._id) {
+        return updatedStock;
+      } else { // No change
+        return stock;
+      }
+    })
+    setStocks(updatedStocks)
   }
 
   return (

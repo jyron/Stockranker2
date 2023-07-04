@@ -25,11 +25,11 @@ const AssetDetail = ({stock}) => {
       <div className="assetcard">
         <div className="assetcardtitle">
           <div className="assetcardtitledivimage">
-            <img className="assetcardtitleimage" src="https://static.binance.org/icon/7df5e4de406a4764971244909ae9fcbf"/>
+            <img className="assetcardtitleimage" src={`${stock.logo}`}/>
           </div>
           <div className="assetcardtitlediv">
-            <div className="assetcardtitleinfo">USDSB</div>
-            <div className="assetcardsubtitleinfo">USDS</div>
+            <div className="assetcardtitleinfo">{`${stock.name}`}</div>
+            <div className="assetcardsubtitleinfo">{`${stock.ipo}`}</div>
           </div>
           <div className="assetcardtitleicons">
             <img class="icons iconfb" alt="Facebook" />
@@ -41,11 +41,11 @@ const AssetDetail = ({stock}) => {
         <div className="assetcarddivlist">
           <ul className="assetcarddivlistul">
             <li className="assetcarddivlistli">Price</li>
-            <li className="assetcarddivlistli">$71.22</li>
+            <li className="assetcarddivlistli">${`${stock.price}`}</li>
           </ul>
           <ul className="assetcarddivlistul">
             <li className="assetcarddivlistli">Ticker</li>
-            <li className="assetcarddivlistli">FTV</li>
+            <li className="assetcarddivlistli">${`${stock.ticker}`}</li>
           </ul>
           <ul className="assetcarddivlistul">
             <li className="assetcarddivlistli">Name</li>
@@ -57,11 +57,11 @@ const AssetDetail = ({stock}) => {
           </ul>
           <ul className="assetcarddivlistul">
             <li className="assetcarddivlistli">Likes</li>
-            <li className="assetcarddivlistli">2</li>
+            <li className="assetcarddivlistli">{`${stock.likes}`}</li>
           </ul>
           <ul className="assetcarddivlistul">
             <li className="assetcarddivlistli">Dislikes</li>
-            <li className="assetcarddivlistli">0</li>
+            <li className="assetcarddivlistli">{`${stock.dislikes}`}</li>
           </ul>
         </div>
       </div>

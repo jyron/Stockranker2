@@ -23,8 +23,10 @@ const StockTable = ({stocks, onUpdateStock}) => {
       {
         Header: "",
         accessor: "logo",
-        Cell: ({ value }) => (
-          <img src={value} alt="Logo" width={50} height={50} />
+        Cell: ({ value, row }) => (
+          <a href={`/assets/${row.original._id}`}>
+            <img src={value} alt="Logo" width={50} height={50} />
+          </a>
         ),
       },
       {
@@ -105,30 +107,22 @@ const StockTable = ({stocks, onUpdateStock}) => {
   const { globalFilter } = state;
 
   const handleLike = async (stock_id) => {
-
     await axios
       .get(`http://localhost:8000/stocks/${stock_id}/like?action=like`, {
         withCredentials: true,
       })
       .then(
         (response) => {
-          console.log(response.data)
-          console.log(response.data.action)
           axios
-//          http://localhost:8000/stocks_with_likes
-          .get(`http://localhost:8000/stocks/${stock_id}`, {
+          .get(`http://localhost:8000/stocks_with_likes/${stock_id}`, {
             withCredentials: true
           })
           .then(
             (response) => {
-              console.log(response.data)
+              handleStockUpdate(response.data)
             }
           )
           .catch((err) => console.log(err));
-          if(response.data.action===undefined) {
-            console.log(response.data)
-            displayLikeOrDislike(stock_id, "like")
-          }
         }
       )
       .catch((err) => console.log(err));
@@ -141,12 +135,16 @@ const StockTable = ({stocks, onUpdateStock}) => {
       })
       .then(
         (response) => {
-          console.log(response.data)
-          console.log(response.data.action)
-          if(response.data.action===undefined) {
-            console.log(response.data)
-            displayLikeOrDislike(stock_id, "dislike")
-          }
+          axios
+          .get(`http://localhost:8000/stocks_with_likes/${stock_id}`, {
+            withCredentials: true
+          })
+          .then(
+            (response) => {
+              handleStockUpdate(response.data)
+            }
+          )
+          .catch((err) => console.log(err));
         }
       )
       .catch((err) => console.log(err));
@@ -154,34 +152,8 @@ const StockTable = ({stocks, onUpdateStock}) => {
 
   function handleStockUpdate(updatedStock) {
     setIsEditing(false);
-    onUpdateStock(updatedStock);
+    onUpdateStock(stocks, updatedStock);
   }
-
-  const displayLikeOrDislike = async (stock_id, action) => {
-    if (action === "like") {
-      const updatedStock = stocks?.map(stock => {
-        if (stock._id === stock_id) {
-          stock.likes += 1
-          return stock;
-        } else { // No change
-          return stock;
-        }
-      });
-      handleStockUpdate(updatedStock)
-      console.log(stocks);
-    } else {
-      const updatedStock = stocks?.map(stock => {
-        if (stock._id === stock_id) {
-          stock.dislikes += 1
-          return stock;
-        } else { // No change
-          return stock;
-        }
-      });
-      handleStockUpdate(updatedStock)
-      console.log(stocks);
-    }
-  };
 
   return (
     <div>
@@ -245,12 +217,7 @@ const StockTable = ({stocks, onUpdateStock}) => {
                         color: (indexc===2) ? "#4472de" : "#000000",
                       }}
                     >
-                      {
-                        indexc===0 ?
-                          <a href="/assets">{cell.render("Cell")}</a>
-                        :
-                          cell.render("Cell")
-                      }
+                      {cell.render("Cell")}
                     </TableCell>
                   );
                 })}

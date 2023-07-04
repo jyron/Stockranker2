@@ -18,7 +18,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<StockPage />} />
-            <Route path="/assets" element={<AssetPage />} />
+            <Route path={`/assets/:stock_id`} element={<AssetPage />} />
           </Routes>
         </Router>
         <Footer />

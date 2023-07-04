@@ -46,3 +46,32 @@ async def get_stocks_with_likes():
 async def get_stock(stock_id: str):
     stock = await Stock.get(stock_id)
     return stock
+
+
+@router.get("/stocks_with_likes/{stock_id}")
+async def get_stock_with_likes(stock_id: str):
+    stocks = []
+    pipeline = [
+        {
+            "$group": {
+                "_id": "$stock_id",
+                "like_count": {
+                    "$sum": {"$cond": [{"$eq": ["$like_type", "like"]}, 1, 0]}
+                },
+                "dislike_count": {
+                    "$sum": {"$cond": [{"$eq": ["$like_type", "dislike"]}, 1, 0]}
+                },
+            }
+        }
+    ]
+    result = await StockLike.aggregate(pipeline).to_list()
+    stock = await Stock.get(stock_id)
+
+    matching_doc = next((doc for doc in result if doc["_id"] == stock.id), None)
+
+    like_count = matching_doc["like_count"] if matching_doc else 0
+    dislike_count = matching_doc["dislike_count"] if matching_doc else 0
+    stock.likes = like_count
+    stock.dislikes = dislike_count
+
+    return stock
