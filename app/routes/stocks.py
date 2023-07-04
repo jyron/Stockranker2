@@ -44,5 +44,5 @@ async def get_stocks_with_likes():
 
 @router.get("/stocks/{stock_id}")
 async def get_stock(stock_id: str):
-    stock = await Stock.find_one({"id": stock_id})
+    stock = await Stock.get(stock_id)
     return stock
