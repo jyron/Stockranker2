@@ -5,7 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.db import User, db
 from app.models.stocks import Stock
 from app.models.stocklike import StockLike
-from app.routes import stocklike, stocks
+from app.models.comment import StockComment, CommentLike
+from app.routes import stocklike, stocks, comment
 from app.schemas import UserCreate, UserRead, UserUpdate
 from app.users import auth_backend, current_active_user, fastapi_users
 from app.utils import get_finnhub_data, update_finnub_price
@@ -47,6 +48,7 @@ app.include_router(get_finnhub_data.router, tags=["Finnhub"])
 app.include_router(update_finnub_price.router, tags=["Finnhub"])
 app.include_router(stocks.router, tags=["stocks"])
 app.include_router(stocklike.router, tags=["stocklikes"])
+app.include_router(comment.router, tags=["Comments"])
 
 
 @app.get("/authenticated-route")
@@ -58,5 +60,5 @@ async def authenticated_route(user: User = Depends(current_active_user)):
 async def on_startup():
     await init_beanie(
         database=db,
-        document_models=[User, Stock, StockLike],
+        document_models=[User, Stock, StockLike, CommentLike, StockComment],
     )
