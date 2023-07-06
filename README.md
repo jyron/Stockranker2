@@ -12,9 +12,9 @@ To run the backend follow these steps (in the root directory of the project)
 4. Run the server
 ```python main.py```
 
-Now your backend is runnning on localhost:5000
+Now your backend is runnning on localhost:8000
 
-View all available routes through swagger on localhost:5000/docs
+View all available routes through swagger on localhost:8000/docs
 
 ### Frontend
 To run the frontend follow these steps (make sure you are in the frontend/stockranker/ directory)
