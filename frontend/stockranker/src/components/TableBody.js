@@ -24,50 +24,7 @@ function Header() {
     setPassword("");
   };
 
-  return (
-    <Box>
-      <AppBar position="fixed">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            StockRanker
-          </Typography>
-          {user ? (
-            <>
-              <Typography variant="body1" sx={{ marginRight: 2 }}>
-                Welcome, {user.email}!
-              </Typography>
-              <Button variant="contained" onClick={logout}>
-                Logout
-              </Button>
-            </>
-          ) : (
-            <>
-              <TextField
-                type="email"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                label="Username"
-                sx={{ marginRight: 1 }}
-              />
-              <TextField
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                label="Password"
-                sx={{ marginRight: 1 }}
-              />
-              <Button variant="contained" onClick={handleLogin}>
-                Login
-              </Button>
-              <Button variant="contained" onClick={handleRegister}>
-                Register
-              </Button>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
+  return <Box></Box>;
 }
 
 export { Header };

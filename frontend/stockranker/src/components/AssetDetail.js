@@ -19,7 +19,7 @@ const AssetDetail = ({ stock }) => {
   return (
     <div className="centeringdiv">
       <div className="assetdetailcontainer">
-        <Typography variant="h3">Asset Detail</Typography>
+        <Typography variant="h3">Stock Detail</Typography>
       </div>
       <div className="assetcard">
         <div className="assetcardtitle">
@@ -65,7 +65,7 @@ const AssetDetail = ({ stock }) => {
         </div>
       </div>
       <div className="assetdetailcontainer">
-        <Typography variant="h5">Transactions</Typography>
+        <Typography variant="h5">Comments</Typography>
         <div className="divider"></div>
       </div>
       <div className="assetcardtransactions">
