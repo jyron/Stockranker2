@@ -128,9 +128,11 @@ const StockTable = ({ stocks, onUpdateStock }) => {
 
   const handleDislike = async (stock_id) => {
     await axios
-      .get(`http://localhost:8000/stocks/${stock_id}/dislike?action=dislike`, {
-        withCredentials: true,
-      })
+      .post(
+        `http://localhost:8000/stocks/${stock_id}/dislike`,
+        { action: "dislike" },
+        { withCredentials: true } // here is the correct place for withCredentials
+      )
       .then((response) => {
         axios
           .get(`http://localhost:8000/stocks_with_likes/${stock_id}`, {
