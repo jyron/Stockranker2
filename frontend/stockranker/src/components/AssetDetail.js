@@ -31,9 +31,9 @@ const AssetDetail = ({ stock }) => {
             <div className="assetcardsubtitleinfo">{`${stock.ipo}`}</div>
           </div>
           <div className="assetcardtitleicons">
-            <img class="icons iconfb" alt="Facebook" />
-            <img class="icons icontwitter" alt="Twitter" />
-            <img class="icons iconig" alt="Instagram" />
+            <img className="icons iconfb" alt="Facebook" />
+            <img className="icons icontwitter" alt="Twitter" />
+            <img className="icons iconig" alt="Instagram" />
           </div>
         </div>
         <div className="divider"></div>
@@ -62,54 +62,6 @@ const AssetDetail = ({ stock }) => {
             <li className="assetcarddivlistli">Dislikes</li>
             <li className="assetcarddivlistli">{`${stock.dislikes}`}</li>
           </ul>
-        </div>
-      </div>
-      <div className="assetdetailcontainer">
-        <Typography variant="h5">Comments</Typography>
-        <div className="divider"></div>
-      </div>
-      <div className="assetcardtransactions">
-        <div className="assetcardtransactionsheader">
-          <div className="assetcardtransactionsheadertitle">Rank</div>
-          <div className="assetcardtransactionsheadertitle">Address</div>
-          <div className="assetcardtransactionsheadertitle">Quantity</div>
-          <div className="assetcardtransactionsheadertitle">Percentage</div>
-        </div>
-        <div className="assetcardtransactionscontent">
-          <div className="assetcardtransactionscontenttxt">
-            <span className="assetcardtransactionscircle">1</span>
-          </div>
-          <div className="assetcardtransactionscontenttxt">
-            bnb18d ... 0hy0js
-          </div>
-          <div className="assetcardtransactionscontenttxt">
-            89,999,972,094.50
-          </div>
-          <div className="assetcardtransactionscontenttxt">99.99</div>
-        </div>
-        <div className="assetcardtransactionscontent2">
-          <div className="assetcardtransactionscontenttxt">2</div>
-          <div className="assetcardtransactionscontenttxt">
-            bnb165 ... zy9jc9
-          </div>
-          <div className="assetcardtransactionscontenttxt">4,170.55</div>
-          <div className="assetcardtransactionscontenttxt">&lt;0.01%</div>
-        </div>
-        <div className="assetcardtransactionscontent">
-          <div className="assetcardtransactionscontenttxt">3</div>
-          <div className="assetcardtransactionscontenttxt">
-            bnb1cj ... 6u849e
-          </div>
-          <div className="assetcardtransactionscontenttxt">2,751.00</div>
-          <div className="assetcardtransactionscontenttxt">&lt;0.01%</div>
-        </div>
-        <div className="assetcardtransactionscontent2">
-          <div className="assetcardtransactionscontenttxt">4</div>
-          <div className="assetcardtransactionscontenttxt">
-            bnb1a2 ... 79erd4
-          </div>
-          <div className="assetcardtransactionscontenttxt">1,343.63</div>
-          <div className="assetcardtransactionscontenttxt">&lt;0.01%</div>
         </div>
       </div>
     </div>
