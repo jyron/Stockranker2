@@ -15,6 +15,8 @@ async def like_stock(
     if existing_like:
         if existing_like.like_type == action:
             await remove_like(stock_id=stock_id, user_id=user_id)
+            return {"message": f"Stock {action} removed"}
+
         else:
             # Update the like_type if the user is changing their action
             existing_like.like_type = action
