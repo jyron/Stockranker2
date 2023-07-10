@@ -11,6 +11,17 @@
     align-items: left;
     justify-content: left;
 }
+.commentcard {
+    height: 100%;
+    width: 85%;
+    flex-flow: row;
+    align-items: left;
+    justify-content: left;
+    margin-bottom: 50px;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,.16);
+    padding: 15px;
+}
 .assetcard {
     height: 300px;
     width: 85%;
@@ -111,7 +122,6 @@
     grid-template-rows: 20px;
     grid-template-columns: 203px 1fr;
     margin-bottom: 5px;
-    margin-left: -30px;
 }
 .assetcarddivlistli {
     list-style-type: none;
