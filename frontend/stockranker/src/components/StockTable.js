@@ -14,8 +14,8 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 //import SearchTableHeader from "./SearchTableHeader.js";
 import axios from "axios";
 
-const StockTable = ({stocks, onUpdateStock}) => {
-  const [isEditing, setIsEditing] = useState(false)
+const StockTable = ({ stocks, onUpdateStock }) => {
+  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const columns = useMemo(
@@ -32,18 +32,18 @@ const StockTable = ({stocks, onUpdateStock}) => {
       {
         Header: "Price",
         accessor: "price",
-        sortType: 'basic',
+        sortType: "basic",
         Cell: ({ value }) => <span>{`$${value.toFixed(2)}`}</span>,
       },
       {
         Header: "Ticker",
         accessor: "ticker",
-        sortType: 'basic',
+        sortType: "basic",
       },
       {
         Header: "Name",
         accessor: "name",
-        sortType: 'basic',
+        sortType: "basic",
       },
       {
         Header: "Industry",
@@ -90,14 +90,14 @@ const StockTable = ({stocks, onUpdateStock}) => {
     rows,
     prepareRow,
     state,
-    setGlobalFilter
+    setGlobalFilter,
   } = useTable(
     {
       columns,
       data: stocks,
       initialState: {
-        globalFilter: ""
-      }
+        globalFilter: "",
+      },
     },
     useFilters,
     useGlobalFilter,
@@ -108,23 +108,21 @@ const StockTable = ({stocks, onUpdateStock}) => {
 
   const handleLike = async (stock_id) => {
     await axios
-      .get(`http://localhost:8000/stocks/${stock_id}/like?action=like`, {
-        withCredentials: true,
-      })
-      .then(
-        (response) => {
-          axios
-          .get(`http://localhost:8000/stocks_with_likes/${stock_id}`, {
-            withCredentials: true
-          })
-          .then(
-            (response) => {
-              handleStockUpdate(response.data)
-            }
-          )
-          .catch((err) => console.log(err));
-        }
+      .post(
+        `http://localhost:8000/stocks/${stock_id}/like`,
+        { action: "like" },
+        { withCredentials: true } // here is the correct place for withCredentials
       )
+      .then((response) => {
+        axios
+          .get(`http://localhost:8000/stocks_with_likes/${stock_id}`, {
+            withCredentials: true,
+          })
+          .then((response) => {
+            handleStockUpdate(response.data);
+          })
+          .catch((err) => console.log(err));
+      })
       .catch((err) => console.log(err));
   };
 
@@ -133,20 +131,16 @@ const StockTable = ({stocks, onUpdateStock}) => {
       .get(`http://localhost:8000/stocks/${stock_id}/dislike?action=dislike`, {
         withCredentials: true,
       })
-      .then(
-        (response) => {
-          axios
+      .then((response) => {
+        axios
           .get(`http://localhost:8000/stocks_with_likes/${stock_id}`, {
-            withCredentials: true
+            withCredentials: true,
           })
-          .then(
-            (response) => {
-              handleStockUpdate(response.data)
-            }
-          )
+          .then((response) => {
+            handleStockUpdate(response.data);
+          })
           .catch((err) => console.log(err));
-        }
-      )
+      })
       .catch((err) => console.log(err));
   };
 
@@ -159,25 +153,54 @@ const StockTable = ({stocks, onUpdateStock}) => {
     <div>
       {/*<SearchTableHeader value={{searchTable, searchInput}}/>*/}
       <Typography variant="h3">Stocks</Typography>
-      <div style={{width: "100%", display: "flex", flexFlow: "row", justifyContent: "flex-end", marginBottom: "30px"}}>
-        <div style={{marginRight: "10px"}}>
-          <input type="text" onChange={e => setGlobalFilter(e.target.value)} value={globalFilter} name="searchInput" placeholder="asset, name, currency"
-            style={{fontSize: "16px", color: "#000", width: "300px", height: "35px", display: "block", borderRadius: "5px", paddingLeft: "5px"}} />
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexFlow: "row",
+          justifyContent: "flex-end",
+          marginBottom: "30px",
+        }}
+      >
+        <div style={{ marginRight: "10px" }}>
+          <input
+            type="text"
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            value={globalFilter}
+            name="searchInput"
+            placeholder="asset, name, currency"
+            style={{
+              fontSize: "16px",
+              color: "#000",
+              width: "300px",
+              height: "35px",
+              display: "block",
+              borderRadius: "5px",
+              paddingLeft: "5px",
+            }}
+          />
         </div>
-        <button style={{
-          fontSize: "15px",
-          color: "#fff",
-          width: "87px",
-          height: "35px",
-          display: "block",
-          cursor: "pointer",
-          borderRadius: "5px",
-          backgroundColor: "#222",
-          outline: "var(--colorSearchInput)",
-          marginRight: "50px",
-        }}>Search</button>
+        <button
+          style={{
+            fontSize: "15px",
+            color: "#fff",
+            width: "87px",
+            height: "35px",
+            display: "block",
+            cursor: "pointer",
+            borderRadius: "5px",
+            backgroundColor: "#222",
+            outline: "var(--colorSearchInput)",
+            marginRight: "50px",
+          }}
+        >
+          Search
+        </button>
       </div>
-      <Table {...getTableProps()} style={{ border: "solid 1px black", borderRadius: "15px" }}>
+      <Table
+        {...getTableProps()}
+        style={{ border: "solid 1px black", borderRadius: "15px" }}
+      >
         <TableHead>
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
@@ -189,12 +212,16 @@ const StockTable = ({stocks, onUpdateStock}) => {
                     background: "aliceblue",
                     color: "black",
                     fontWeight: "bold",
-                    cursor: "pointer"
+                    cursor: "pointer",
                   }}
                 >
                   {column.render("Header")}
                   <span>
-                    {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
                   </span>
                 </TableCell>
               ))}
@@ -211,10 +238,10 @@ const StockTable = ({stocks, onUpdateStock}) => {
                     <TableCell
                       {...cell.getCellProps()}
                       style={{
-                      padding: "20px",
+                        padding: "20px",
                         border: "solid 1px gray",
-                        background: (index%2===0) ? "#FFFFFF" : "#f2f2f2",
-                        color: (indexc===2) ? "#4472de" : "#000000",
+                        background: index % 2 === 0 ? "#FFFFFF" : "#f2f2f2",
+                        color: indexc === 2 ? "#4472de" : "#000000",
                       }}
                     >
                       {cell.render("Cell")}
