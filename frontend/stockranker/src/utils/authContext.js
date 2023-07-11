@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   // Fetch the current user
   useEffect(() => {
     axios
-      .get("http://localhost:8000/users/me", { withCredentials: true })
+      .get("http://127.0.0.1:8000/users/me", { withCredentials: true })
       .then((response) => setUser(response.data))
       .catch((err) => console.log(err));
   }, []);
@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
     try {
       const response = await axios({
         method: "post",
-        url: "http://localhost:8000/auth/jwt/login",
+        url: "http://127.0.0.1:8000/auth/jwt/login",
         data: {
           username: username,
           password: password,
