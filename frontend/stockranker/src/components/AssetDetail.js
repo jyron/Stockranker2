@@ -15,6 +15,8 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import axios from "axios";
 
+import { Helmet } from "react-helmet";
+
 const AssetDetail = ({ stock }) => {
   return (
     <div className="centeringdiv">
@@ -66,50 +68,11 @@ const AssetDetail = ({ stock }) => {
       </div>
       <div className="assetdetailcontainer">
         <Typography variant="h5">Comments</Typography>
-        <div className="divider"></div>
-      </div>
-      <div className="assetcardtransactions">
-        <div className="assetcardtransactionsheader">
-          <div className="assetcardtransactionsheadertitle">Rank</div>
-          <div className="assetcardtransactionsheadertitle">Address</div>
-          <div className="assetcardtransactionsheadertitle">Quantity</div>
-          <div className="assetcardtransactionsheadertitle">Percentage</div>
-        </div>
-        <div className="assetcardtransactionscontent">
-          <div className="assetcardtransactionscontenttxt">
-            <span className="assetcardtransactionscircle">1</span>
-          </div>
-          <div className="assetcardtransactionscontenttxt">
-            bnb18d ... 0hy0js
-          </div>
-          <div className="assetcardtransactionscontenttxt">
-            89,999,972,094.50
-          </div>
-          <div className="assetcardtransactionscontenttxt">99.99</div>
-        </div>
-        <div className="assetcardtransactionscontent2">
-          <div className="assetcardtransactionscontenttxt">2</div>
-          <div className="assetcardtransactionscontenttxt">
-            bnb165 ... zy9jc9
-          </div>
-          <div className="assetcardtransactionscontenttxt">4,170.55</div>
-          <div className="assetcardtransactionscontenttxt">&lt;0.01%</div>
-        </div>
-        <div className="assetcardtransactionscontent">
-          <div className="assetcardtransactionscontenttxt">3</div>
-          <div className="assetcardtransactionscontenttxt">
-            bnb1cj ... 6u849e
-          </div>
-          <div className="assetcardtransactionscontenttxt">2,751.00</div>
-          <div className="assetcardtransactionscontenttxt">&lt;0.01%</div>
-        </div>
-        <div className="assetcardtransactionscontent2">
-          <div className="assetcardtransactionscontenttxt">4</div>
-          <div className="assetcardtransactionscontenttxt">
-            bnb1a2 ... 79erd4
-          </div>
-          <div className="assetcardtransactionscontenttxt">1,343.63</div>
-          <div className="assetcardtransactionscontenttxt">&lt;0.01%</div>
+        <div className="commentSection">
+          <Helmet>
+            <script defer src="https://cdn.commento.io/js/commento.js"></script>
+          </Helmet>
+          <div id="commento"></div>
         </div>
       </div>
     </div>
