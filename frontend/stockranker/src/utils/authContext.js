@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   // Fetch the current user
   useEffect(() => {
     axios
-      .get("http://jyronlocal:8000/users/me", { withCredentials: true })
+      .get("http://127.0.0.1:80/users/me", { withCredentials: true })
       .then((response) => setUser(response.data))
       .catch((err) => console.log(err));
   }, []);
@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
     try {
       const response = await axios({
         method: "post",
-        url: "http://jyronlocal:8000/auth/jwt/login",
+        url: "http://127.0.0.1:80/auth/jwt/login",
         data: {
           username: username,
           password: password,
@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
     try {
       const response = await axios({
         method: "post",
-        url: "http://jyronlocal:8000/auth/register",
+        url: "http://127.0.0.1:80/auth/register",
         data: {
           email: username,
           password: password,
@@ -61,7 +61,7 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     try {
       await axios.post(
-        "http://jyronlocal:8000/auth/jwt/logout",
+        "http://127.0.0.1:80/auth/jwt/logout",
         {},
         { withCredentials: true }
       );

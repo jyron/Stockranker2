@@ -11,7 +11,7 @@ const StockPage = () => {
     const fetchStocks = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/stocks_with_likes"
+          "http://127.0.0.1:80/stocks_with_likes"
         );
         setStocks(response.data);
       } catch (error) {
@@ -22,24 +22,22 @@ const StockPage = () => {
   }, []);
 
   function onUpdateStock(stocks, updatedStock) {
-    const updatedStocks = stocks?.map(stock => {
+    const updatedStocks = stocks?.map((stock) => {
       if (stock._id === updatedStock._id) {
         return updatedStock;
-      } else { // No change
+      } else {
+        // No change
         return stock;
       }
-    })
-    setStocks(updatedStocks)
+    });
+    setStocks(updatedStocks);
   }
 
   return (
     <Box marginTop="75px" p="3px">
       <div>
         {stocks.length > 0 ? (
-          <StockTable
-            stocks={stocks}
-            onUpdateStock={onUpdateStock}
-          />
+          <StockTable stocks={stocks} onUpdateStock={onUpdateStock} />
         ) : (
           <p>Loading stocks...</p>
         )}

@@ -12,7 +12,7 @@ from app.users import auth_backend, current_active_user, fastapi_users
 from app.utils import get_finnhub_data, update_finnub_price
 
 app = FastAPI()
-origins = ["http://localhost:3000", "http://jyronlocal:3000"]
+origins = ["http://localhost:3000"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -44,8 +44,8 @@ app.include_router(
     prefix="/users",
     tags=["users"],
 )
-app.include_router(get_finnhub_data.router, tags=["Finnhub"])
-app.include_router(update_finnub_price.router, tags=["Finnhub"])
+# app.include_router(get_finnhub_data.router, tags=["Finnhub"])
+# app.include_router(update_finnub_price.router, tags=["Finnhub"])
 app.include_router(stocks.router, tags=["stocks"])
 app.include_router(stocklike.router, tags=["stocklikes"])
 app.include_router(comment.router, tags=["Comments"])
