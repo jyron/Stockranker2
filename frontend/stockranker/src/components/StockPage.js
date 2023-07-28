@@ -11,7 +11,7 @@ const StockPage = () => {
     const fetchStocks = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:80/stocks_with_likes"
+          "http://3.84.190.13/stocks_with_likes"
         );
         setStocks(response.data);
       } catch (error) {

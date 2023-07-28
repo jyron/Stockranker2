@@ -1,3 +1,4 @@
+"""
 import json
 import time
 
@@ -31,3 +32,4 @@ async def update_prices():
 @router.get("/update_prices")
 async def update_prices_router():
     return await update_prices()
+"""

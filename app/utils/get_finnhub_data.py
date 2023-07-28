@@ -2,7 +2,7 @@ import json
 import time
 from pprint import pprint as print
 
-import finnhub
+"""import finnhub
 from beanie import Document
 from fastapi import APIRouter
 from pydantic import ValidationError
@@ -42,3 +42,4 @@ async def fill_db_finnhub():
             time.sleep(1)
         except Exception as e:
             print(f"Error: {e}")
+"""

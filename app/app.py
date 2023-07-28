@@ -9,7 +9,8 @@ from app.models.comment import StockComment, CommentLike
 from app.routes import stocklike, stocks, comment
 from app.schemas import UserCreate, UserRead, UserUpdate
 from app.users import auth_backend, current_active_user, fastapi_users
-from app.utils import get_finnhub_data, update_finnub_price
+
+# from app.utils import get_finnhub_data, update_finnub_price
 
 app = FastAPI()
 origins = ["http://localhost:3000"]
