@@ -3,6 +3,7 @@ import axios from "axios";
 import AssetDetail from "./AssetDetail";
 import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
+import api from "../config";
 
 const AssetPage = (props) => {
   const { stock_id } = useParams();
@@ -12,9 +13,7 @@ const AssetPage = (props) => {
   useEffect(() => {
     const fetchStock = async () => {
       try {
-        const response = await axios.get(
-          `http://127.0.0.1:80/stocks_with_likes/${stock_id}`
-        );
+        const response = await api.get(`/stocks_with_likes/${stock_id}`);
         setStock(response.data);
       } catch (error) {
         console.error("Error fetching stock:", error);

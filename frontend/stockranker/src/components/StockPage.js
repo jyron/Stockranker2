@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StockTable from "./StockTable";
 import { Box, Typography } from "@mui/material";
+import api from "../config.js";
 
 const StockPage = () => {
   const [stocks, setStocks] = useState([]);
@@ -10,9 +11,7 @@ const StockPage = () => {
   useEffect(() => {
     const fetchStocks = async () => {
       try {
-        const response = await axios.get(
-          "http://3.84.190.13/stocks_with_likes"
-        );
+        const response = await api.get("/stocks_with_likes");
         setStocks(response.data);
       } catch (error) {
         console.error("Error fetching stocks:", error);

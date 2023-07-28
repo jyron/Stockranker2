@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import api from "../config";
 
 const AuthContext = createContext();
 
@@ -9,17 +10,17 @@ export function AuthProvider({ children }) {
 
   // Fetch the current user
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:80/users/me", { withCredentials: true })
+    api
+      .get("/users/me", { withCredentials: true })
       .then((response) => setUser(response.data))
       .catch((err) => console.log(err));
   }, []);
 
   const login = async (username, password) => {
     try {
-      const response = await axios({
+      const response = await api({
         method: "post",
-        url: "http://127.0.0.1:80/auth/jwt/login",
+        url: "/auth/jwt/login",
         data: {
           username: username,
           password: password,
@@ -44,9 +45,9 @@ export function AuthProvider({ children }) {
 
   const register = async (username, password) => {
     try {
-      const response = await axios({
+      const response = await api({
         method: "post",
-        url: "http://127.0.0.1:80/auth/register",
+        url: "/auth/register",
         data: {
           email: username,
           password: password,
@@ -60,11 +61,7 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      await axios.post(
-        "http://127.0.0.1:80/auth/jwt/logout",
-        {},
-        { withCredentials: true }
-      );
+      await api.post("/auth/jwt/logout", {}, { withCredentials: true });
       setUser(null);
     } catch (err) {
       console.error(err);

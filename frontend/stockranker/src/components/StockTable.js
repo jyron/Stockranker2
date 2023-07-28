@@ -13,6 +13,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 //import SearchTableHeader from "./SearchTableHeader.js";
 import axios from "axios";
+import api from "../config";
 
 const StockTable = ({ stocks, onUpdateStock }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -107,15 +108,15 @@ const StockTable = ({ stocks, onUpdateStock }) => {
   const { globalFilter } = state;
 
   const handleLike = async (stock_id) => {
-    await axios
+    await api
       .post(
-        `http://localhost:8000/stocks/${stock_id}/like`,
+        `/stocks/${stock_id}/like`,
         { action: "like" },
         { withCredentials: true } // here is the correct place for withCredentials
       )
       .then((response) => {
-        axios
-          .get(`http://localhost:8000/stocks_with_likes/${stock_id}`, {
+        api
+          .get(`/stocks_with_likes/${stock_id}`, {
             withCredentials: true,
           })
           .then((response) => {
@@ -127,15 +128,15 @@ const StockTable = ({ stocks, onUpdateStock }) => {
   };
 
   const handleDislike = async (stock_id) => {
-    await axios
+    await api
       .post(
-        `http://localhost:8000/stocks/${stock_id}/dislike`,
+        `/stocks/${stock_id}/dislike`,
         { action: "dislike" },
         { withCredentials: true } // here is the correct place for withCredentials
       )
       .then((response) => {
-        axios
-          .get(`http://localhost:8000/stocks_with_likes/${stock_id}`, {
+        api
+          .get(`/stocks_with_likes/${stock_id}`, {
             withCredentials: true,
           })
           .then((response) => {
